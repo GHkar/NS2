@@ -33,10 +33,19 @@ set n3 [$ns node]
 set n4 [$ns node]
 
 
-$ns duplex-link $n0 $n1 2Mb 3ms DropTail
+set a 0
+set b 1
+set c 1.5
+set d 3.5
+$ns duplex-link [expr $[format "n%d" $a]] [expr $[format "n%d" $b]] [format "%0.1fMb" $c] [format "%0.1fms" $d] DropTail
 $ns duplex-link $n0 $n2 2Mb 3ms DropTail
 $ns duplex-link $n0 $n3 2Mb 3ms DropTail
 $ns duplex-link $n0 $n4 2Mb 3ms DropTail
+
+#$ns duplex-link $n0 $n1 2Mb 3ms DropTail
+#$ns duplex-link $n0 $n2 2Mb 3ms DropTail
+#$ns duplex-link $n0 $n3 2Mb 3ms DropTail
+#$ns duplex-link $n0 $n4 2Mb 3ms DropTail
 
 
 # TCP Application for n1 and n2
