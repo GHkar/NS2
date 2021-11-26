@@ -8,9 +8,9 @@ $ns color 1 Red
 $ns color 2 Blue
 
 # how many makes node
-set realNode 20
+set realNode 8610
 # limit node num
-set limit 10
+set limit 100
 set throughput 3
 set delayTime 3.5
 set packetSize 1448
@@ -47,12 +47,13 @@ gets $f line
 # setting node
 set nodeNum 1
 
-while { $nodeNum < $realNode } {
+while { $nodeNum <= $realNode } {
 
 # set n0 [$ns node]
 # set n1 [$ns node]
 # .
 # .
+
 
 set [format "n%d" $nodeNum] [$ns node]
 set nodeNum [expr $nodeNum + 1]
@@ -84,6 +85,7 @@ if { $s != $nodeNum} {
 set nodeNum [expr $nodeNum + 1]
 }
 
+
 if {$s <= $limit} {
 # $ns duplex-link $n0 $n1 2Mb 3ms DropTail
 # $ns duplex-link $n0 $n2 2Mb 3ms DropTail
@@ -96,6 +98,7 @@ $ns duplex-link [expr $[format "n%d" $s]] [expr $[format "n%d" $t]] [format "%0.
 close $f
 
 # ======================================================
+
 
 # loading peer info.txt
 set f [open "peerinfo copy.txt" r]
@@ -188,9 +191,10 @@ set appNum [expr $appNum + 1]
 }
 }
 
-
 # ======================================================
 
+puts "Total Link"
+puts [expr $appNum - 1]
 
 # Event Scheduling 시간을 의미 0.1초에 시작~ 2.1초에 끝남
 set snum 0
@@ -203,11 +207,13 @@ while { $snum < [expr $appNum - 1] } {
 
 $ns at .2 "[expr $[format "ftp%d" $snum]] start"
 $ns at .2 "[expr $[format "cbr%d" $snum]] start"
-$ns at 4 "[expr $[format "ftp%d" $snum]] stop"
-$ns at 4 "[expr $[format "cbr%d" $snum]] stop"
+$ns at 1 "[expr $[format "ftp%d" $snum]] stop"
+$ns at 1 "[expr $[format "cbr%d" $snum]] stop"
 
 set snum [expr $snum + 1]
 
 }
-$ns at 4.1 "finish"
+
+
+$ns at 1.1 "finish"
 $ns run
