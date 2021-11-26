@@ -37,7 +37,7 @@ proc finish { } {
 }
 
 # loading peer info.txt
-set f [open "peerinfo copy.txt" r]
+set f [open "peerinfo.txt" r]
 gets $f line
 # throw first line like "source target"
 
