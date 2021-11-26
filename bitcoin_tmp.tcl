@@ -10,7 +10,7 @@ $ns color 2 Blue
 # how many makes node
 set realNode 8610
 # limit node num
-set limit 100
+set limit 8604
 set throughput 3
 set delayTime 3.5
 set packetSize 1448
@@ -79,11 +79,15 @@ set column [expr $column + 1]
 }
 
 set s $sourceTarget(0)
-set t $sourceTarget(1)
+set t [expr $sourceTarget(1) % 8000]
 
 if { $s != $nodeNum} {
 set nodeNum [expr $nodeNum + 1]
 }
+
+puts $s
+puts $t
+puts "\n"
 
 
 if {$s <= $limit} {
@@ -119,7 +123,7 @@ set column [expr $column + 1]
 }
 
 set s $sourceTarget(0)
-set t $sourceTarget(1)
+set t [expr $sourceTarget(1) % 8000]
 
 
 if { $s != $nodeNum} {
